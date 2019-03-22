@@ -3,6 +3,7 @@ import React from 'react'
 class News extends React.Component {
 
     render() {
+
         if (this.props.news) {
             const news = this.props.news.data.allNews.edges.sort((a, b) => {
                 if (new Date(a.node.startDate) < new Date(b.node.startDate))
@@ -31,6 +32,8 @@ class News extends React.Component {
                                                                     {new Date(newsdata.node.startDate).getUTCDate()}
                                                                     <span className='separator'> + </span>
                                                                     {new Date(newsdata.node.endDate).getUTCDate()}
+                                                                    <br />
+                                                                    <span className='month'>{new Date(newsdata.node.endDate).toLocaleString('de', { month: 'short' })}</span>
                                                                 </span>
 
                                                                 :
@@ -38,20 +41,23 @@ class News extends React.Component {
                                                                     {new Date(newsdata.node.startDate).getUTCDate()}
                                                                     <span className='separator'> - </span>
                                                                     {new Date(newsdata.node.endDate).getUTCDate()}
+                                                                    <br />
+                                                                    <span className='month'>{new Date(newsdata.node.endDate).toLocaleString('de', { month: 'short' })}</span>
                                                                 </span>
                                                         ) :
                                                         (
                                                             <span>
                                                                 {new Date(newsdata.node.startDate).getUTCDate()}
-                                                                <span className='month'>{new Date(newsdata.node.startDate).toLocaleString('de', { month: 'short' })}</span>
-                                                                <span className='separator'>&nbsp; - &nbsp;</span>
+                                                                <span className='separator'>-</span>
                                                                 {new Date(newsdata.node.endDate).getUTCDate()}
-
+                                                                <br />
+                                                                <span className='month'>{new Date(newsdata.node.startDate).toLocaleString('de', { month: 'short' })}</span>
+                                                                <span className='separator'>-</span>
+                                                                <span className='month'>{new Date(newsdata.node.endDate).toLocaleString('de', { month: 'short' })}</span>
                                                             </span>
                                                         )
                                                     }
-                                                    <br />
-                                                    <span className='month'>{new Date(newsdata.node.endDate).toLocaleString('de', { month: 'short' })}</span>
+
                                                 </span>
                                             </div>
                                         ) :
