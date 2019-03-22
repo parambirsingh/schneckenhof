@@ -9,8 +9,8 @@ exports.sourceNodes = async ({ boundActionCreators }) => {
   ).then(res => res.json());
   const type = 'Wine';
   data.map(item => {
-    console.log(item);
     item.id = item.id + '';
+    console.log(item);
     const contentDigest = crypto
       .createHash(`md5`)
       .update(JSON.stringify(item))

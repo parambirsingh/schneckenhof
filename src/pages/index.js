@@ -11,6 +11,7 @@ import party1 from "../assets/images/party1.jpg";
 import restaurant from "../assets/images/restaurant.jpg";
 
 import config from "./index.json";
+import News from '../components/News'
 
 const Teaser = props => (
   <div className="teaser">
@@ -23,7 +24,7 @@ const Teaser = props => (
   </div>
 );
 
-const IndexPage = ({ i18n }) => (
+const IndexPage = ({ i18n, data }) => (
   <div className="startseite content-container">
     <header>
       <div className="branding">
@@ -32,11 +33,15 @@ const IndexPage = ({ i18n }) => (
 
       <div>
         <div className="info">
-          <h4>
+          {
+            data && data.allNews.edges.map((newsdata, index) => {
+              return newsdata.node.showOnHome && <h4 key={index}>{newsdata.node.title} <br />{newsdata.node.homePageDescription}</h4>
+            })}
+          {/* <h4>
             Weihnachtsmarkt am ersten Adventswochenende. Adventszauber im
             Schneckenhof<br />
             Sa. 1.12. ab 15 Uhr & So. 2.12. ab 11 Uhr{" "}
-          </h4>
+          </h4> */}
         </div>
       </div>
     </header>
@@ -97,3 +102,24 @@ const IndexPage = ({ i18n }) => (
 );
 
 export default withI18n()(IndexPage);
+
+export const query = graphql`
+  query IndexQuery {
+    allNews{
+      edges {
+        node {
+           id,
+           relevantTo, 
+           relevantFrom,
+           title,
+           shortDescription,
+           description,
+           startDate,
+           endDate,
+           showOnHome,
+           homePageDescription
+        }
+      }
+    }
+  }
+`

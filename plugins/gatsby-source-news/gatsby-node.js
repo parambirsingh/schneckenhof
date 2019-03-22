@@ -9,7 +9,10 @@ exports.sourceNodes = async ({ boundActionCreators }) => {
   ).then(res => res.json());
   const type = 'News';
   data.map(item => {
+
     item.id = item.id + 'news';
+    item.showOnHome = item.showOnHome ? item.showOnHome : false;
+    item.homePageDescription = item.homePageDescription ? item.homePageDescription : item.shortDescription
     const contentDigest = crypto.createHash(`md5`).update(JSON.stringify(item)).digest(`hex`);
     const nodeBase = {
       parent: null,

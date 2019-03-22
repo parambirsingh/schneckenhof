@@ -3,7 +3,7 @@ import React from 'react'
 class News extends React.Component {
 
     render() {
-
+console.log(this.props.news)
         if (this.props.news) {
             const news = this.props.news.data.allNews.edges.sort((a, b) => {
                 if (new Date(a.node.startDate) < new Date(b.node.startDate))
