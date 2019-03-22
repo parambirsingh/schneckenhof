@@ -4,6 +4,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-source-wines',
+    'gatsby-source-news',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-react-next',
     'gatsby-plugin-postcss-sass',
