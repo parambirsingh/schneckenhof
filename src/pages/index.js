@@ -32,11 +32,15 @@ const IndexPage = ({ i18n, data }) => (
       </div>
 
       <div>
-        <div className="info">
+        <div className="info" onclick="openNews()">
+        <a href = '/aktuelles'>
+
+       
           {
             data && data.allNews.edges.map((newsdata, index) => {
               return newsdata.node.showOnHome && <h4 key={index}>{newsdata.node.title} <br />{newsdata.node.homePageDescription}</h4>
             })}
+             </a>
           {/* <h4>
             Weihnachtsmarkt am ersten Adventswochenende. Adventszauber im
             Schneckenhof<br />

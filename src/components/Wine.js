@@ -54,7 +54,7 @@ export default ({ wine }) => (
                     wine.packaging.measure + wine.packaging.unitOfMeasure}
                 </span>
                 {/* {wine.content < 1 && <span className='liter-price'>{accounting.formatMoney(wine.price / (wine.content * 100) * 100, '€', 2, '.', ',')}/l</span>} */}
-                {wine.packaging.measure < 1000 && (
+                {wine.packaging.unitOfMeasure != "l" && wine.packaging.measure < 1000 && (
                   <span className="liter-price">
                     {accounting.formatMoney(
                       wine.price / wine.packaging.measure * 1000,
