@@ -6,7 +6,7 @@ import SubpageHeader from "../components/SubpageHeader";
 import Cart from "../components/Cart";
 
 const windowGlobal = typeof window !== "undefined" && window;
-const CHECKOUT_URL = "https://schneckenhof4-api.herokuapp.com/payment/checkout";
+const CHECKOUT_URL = "https://schneckenhof-api4.herokuapp.com/payment/checkout";
 // const CHECKOUT_URL =
 // 'https://calm-cliffs-35577.herokuapp.com/payment/checkout'
 class Checkout extends React.Component {
@@ -35,61 +35,61 @@ class Checkout extends React.Component {
     let items = this.props.items.map((item, index) => {
       formBody.push(
         encodeURIComponent(`items[${index}][name]`) +
-          "=" +
-          encodeURIComponent(
-            `${item.packaging &&
-              (item.packaging.displayName ||
-                item.packaging.measure + item.packaging.unitOfMeasure)} ${
-              item.name
-            } ${item.varietal}`
-          )
+        "=" +
+        encodeURIComponent(
+          `${item.packaging &&
+          (item.packaging.displayName ||
+            item.packaging.measure + item.packaging.unitOfMeasure)} ${
+          item.name
+          } ${item.varietal}`
+        )
       );
       formBody.push(
         encodeURIComponent(`items[${index}][price]`) +
-          "=" +
-          encodeURIComponent(item.price.toFixed(2))
+        "=" +
+        encodeURIComponent(item.price.toFixed(2))
       );
       formBody.push(
         encodeURIComponent(`items[${index}][quantity]`) +
-          "=" +
-          encodeURIComponent(item.quantity)
+        "=" +
+        encodeURIComponent(item.quantity)
       );
       formBody.push(
         encodeURIComponent(`items[${index}][currency]`) +
-          "=" +
-          encodeURIComponent("EUR")
+        "=" +
+        encodeURIComponent("EUR")
       );
       formBody.push(
         encodeURIComponent(`items[${index}][packaging]`) +
-          "=" +
-          JSON.stringify(item.packaging)
+        "=" +
+        JSON.stringify(item.packaging)
       );
       formBody.push(
         encodeURIComponent(`items[${index}][varietal]`) +
-          "=" +
-          encodeURIComponent(item.varietal)
+        "=" +
+        encodeURIComponent(item.varietal)
       );
       formBody.push(
         encodeURIComponent(`items[${index}][wineId]`) +
-          "=" +
-          encodeURIComponent(item.id)
+        "=" +
+        encodeURIComponent(item.id)
       );
     });
 
     formBody.push(
       encodeURIComponent(`shipping`) +
-        "=" +
-        encodeURIComponent(this.props.shipping.toFixed(2))
+      "=" +
+      encodeURIComponent(this.props.shipping.toFixed(2))
     );
     formBody.push(
       encodeURIComponent(`subtotal`) +
-        "=" +
-        encodeURIComponent(this.props.total.toFixed(2))
+      "=" +
+      encodeURIComponent(this.props.total.toFixed(2))
     );
     formBody.push(
       encodeURIComponent(`total`) +
-        "=" +
-        encodeURIComponent(this.props.grandTotal.toFixed(2))
+      "=" +
+      encodeURIComponent(this.props.grandTotal.toFixed(2))
     );
 
     formBody = formBody.join("&");
@@ -104,11 +104,17 @@ class Checkout extends React.Component {
       .then(res => res.json())
       .then(res => {
         this.props.clear();
-        windowGlobal && (document.location.href = res.href);
+        if (res.error) {
+          navigateTo("/fehler");
+        } else {
+          navigateTo("/danke");
+        }
+        // windowGlobal && (document.location.href = res.href);
+
       })
       .catch(e => {
         this.props.clear();
-        navigateTo("/danke");
+        navigateTo("/fehler");
       });
   }
 
