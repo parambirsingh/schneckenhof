@@ -37,7 +37,7 @@ class News extends React.Component {
                         <br />
                         <br />
                         <br />
-                    <h2 className='aktuelles'>Vorschau und Termine 2018:</h2>
+                    {/* <h2 className='aktuelles'>Vorschau und Termine 2018:</h2> */}
 
                     <div className="news-content">
                         {
