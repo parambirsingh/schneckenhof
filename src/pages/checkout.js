@@ -47,7 +47,7 @@ class Checkout extends React.Component {
       formBody.push(
         encodeURIComponent(`items[${index}][price]`) +
         "=" +
-        encodeURIComponent(item.price.toFixed(2))
+        encodeURIComponent(parseFloat(item.price).toFixed(2))
       );
       formBody.push(
         encodeURIComponent(`items[${index}][quantity]`) +

@@ -14,7 +14,7 @@ const CartItem = ({ item, add, remove }) => (
     <div className="item-systemname">
       {item.content}l {item.name}
     </div>
-    <div className="item-price">€{item.price.toFixed(2)}</div>
+    <div className="item-price">€{parseFloat(item.price).toFixed(2)}</div>
     <div className="item-total">€{item.total.toFixed(2)}</div>
     <div className="item-remove">
       <a className="cart-anchor" onClick={() => remove(item, item.quantity)}>
