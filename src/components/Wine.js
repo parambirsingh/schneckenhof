@@ -3,7 +3,7 @@ import accounting from "accounting";
 import AddToCart from "./AddToCart";
 import AwwardBadge from "./AwardBadge";
 
-const onWineChange = wine => {};
+const onWineChange = wine => { };
 
 const priceInt = price => Math.floor(price);
 const priceDecimals = price => Math.round((price - priceInt(price)) * 100);
@@ -35,7 +35,11 @@ export default ({ wine }) => (
 
     <div className="description">
       <div>
-        <div className="wine__vintage">{wine.vintage}</div>
+        {wine.vintage != 0 && (
+          <div className="wine__vintage">
+            {wine.vintage}
+          </div>
+        )}
         <h4 className="item_name">{wine.name ? wine.name : wine.varietal}</h4>
 
         {wine.varietal && (
